@@ -81,5 +81,4 @@
 
 (defn leaderboard
   []
-  (map (juxt :team-name :language :started :finished :num-moves)
-       (filter :finished (vals (:teams @world)))))
+  (filter :finished (vals (:teams @world))))

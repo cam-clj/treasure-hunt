@@ -9,11 +9,11 @@
   (f/unparse (f/formatters :rfc822) d))
 
 (def ^:private leaderboard-columns
-  (partition 2 ["Team"            :team-name
-                "Language"        :language
-                "Started"         (comp render-date :started)
-                "Time taken"      (comp seconds->str :time-taken)
-                "Number of moves" :num-moves]))
+  (partition 2 ["Team"       :team-name
+                "Language"   :language
+                "Started"    (comp render-date :started)
+                "Time taken" (comp seconds->str :time-taken)
+                "Moves"      :num-moves]))
 
 (defn render-leaderboard-row
   [row]
