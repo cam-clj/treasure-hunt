@@ -7,6 +7,7 @@
                  [slingshot "0.10.3"]
                  [compojure "1.1.8"]
                  [hiccup "1.0.5"]
+                 [clojurewerkz/route-one "1.1.0"]
                  [clj-time "0.7.0"]
                  [clj-http-status "0.1.0"]]
   :plugins [[lein-ring "0.8.11"]]

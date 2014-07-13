@@ -1,23 +1,23 @@
-curl -XGET http://localhost:3000/{{TEAM_ID}}/look
+curl -XGET {{LOOK}}
 You are in a maze of twisty little passages, all alike.
 There is an exit to the east.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/north
+curl -XPOST {{NORTH}}
 You can't walk through walls!
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/east
+curl -XPOST {{EAST}}
 You are in a maze of twisty little passages, all alike.
 There are exits to the west, south and east.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/south
+curl -XPOST {{SOUTH}}
 You are in a maze of twisty little passages, all alike.
 There are exits to the west, south and north.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/west
+curl -XPOST {{WEST}}
 You are in a maze of twisty little passages, all alike.
 There is an exit to the east.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/east
+curl -XPOST {{EAST}}
 You are in a maze of twisty little passages, all alike.
 There are exits to the west, south and north.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/south
+curl -XPOST {{SOUTH}}
 You are in a maze of twisty little passages, all alike.
 There are exits to the west, east and north.
-curl -XPOST http://localhost:3000/{{TEAM_ID}}/east
+curl -XPOST {{EAST}}
 Congratulations, you found the treasure!
 You made 6 moves and took 2 minutes to complete the puzzle.

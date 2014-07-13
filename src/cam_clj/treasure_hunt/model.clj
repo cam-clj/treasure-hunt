@@ -70,7 +70,7 @@
   (let [next-world (swap! world update-position team-id direction)
         team       (get-in next-world [:teams team-id])]
     (if (= (:treasure next-world) (:position team))
-      (let [finished   (t/now) time-taken
+      (let [finished   (t/now)
             time-taken (t/in-seconds (t/interval (:started team) finished))]
         (swap! world update-in [:teams team-id] assoc :finished finished :time-taken time-taken)
         {:found-treasure? true

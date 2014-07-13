@@ -37,5 +37,4 @@
       [:h1 "Leaderboard"]
       (if (not-empty leaderboard)
         (render-leaderboard-table leaderboard)
-        [:p "No teams have found the treasure yet."])]
-     :nav :leaderboard)))
+        [:p "No teams have found the treasure yet."])])))

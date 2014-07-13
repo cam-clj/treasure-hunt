@@ -4,11 +4,17 @@
             [hiccup.core :refer [html]]
             [hiccup.element :refer [link-to]]
             [cam-clj.treasure-hunt.model :as m]
+            [cam-clj.treasure-hunt.routes :as r]
             [cam-clj.treasure-hunt.views.common :refer [layout]]))
 
 (defn- sample-session
   [team-id]
-  (str/replace (slurp (io/resource "session.txt")) "{{TEAM_ID}" team-id))
+  (-> (slurp (io/resource "session.txt"))
+      (str/replace "{{LOOK}}"  (r/look-url :team-id team-id))
+      (str/replace "{{NORTH}}" (r/move-url :team-id team-id :direction "north"))
+      (str/replace "{{EAST}}"  (r/move-url :team-id team-id :direction "east"))
+      (str/replace "{{SOUTH}}" (r/move-url :team-id team-id :direction "south"))
+      (str/replace "{{WEST}}"  (r/move-url :team-id team-id :direction "west"))))
 
 (defn welcome
   [team-id]
@@ -20,19 +26,18 @@
       [:p "Your team has been assigned the id " [:code team-id] ". Make a note of this - you are going to need it to play."]
       [:p "Your objective is to write a program that will navigate the maze in search of the treasure. Your program interacts with the server by issuing HTTP requests. The server understands the following commands:"]
       [:dl
-       [:dt "LOOK - " [:code "GET /" team-id "/look"]]
+       [:dt "LOOK - " [:code "GET " (r/look-url :team-id team-id)]]
        [:dd "Examine your current position"]
-       [:dt "NORTH - " [:code "POST /" team-id "/north"]]
+       [:dt "NORTH - " [:code "POST " (r/move-url :team-id team-id :direction "north")]]
        [:dd "Move north"]
-       [:dt "EAST - " [:code "POST /" team-id "/east"]]
+       [:dt "EAST - " [:code "POST " (r/move-url :team-id team-id :direction "east")]]
        [:dd "Move east"]
-       [:dt "SOUTH - " [:code "POST /" team-id "/south"]]
+       [:dt "SOUTH - " [:code "POST " (r/move-url :team-id team-id :direction "south")]]
        [:dd "Move south"]
-       [:dt "WEST - " [:code "POST /" team-id "/west"]]
+       [:dt "WEST - " [:code "POST " (r/move-url :team-id team-id :direction "west")]]
        [:dd "Move west"]]
       [:p "Successful requests to the server will return HTTP status 200 (OK) and a plaintext body describing your current location or letting you know if you have found the treasure. Attempts to walk through a wall will return with HTTP status 400 (Bad Request), while unrecognized commands will receive HTTP status 404 (Not Found)."]
       [:p "An example session might look like:"]
       [:pre (sample-session team-id)]
       [:p "When you have found the treasure, check out the " (link-to {:target "_blank"} "/leaderboard" "Leaderboard")
-       " to see how your team fared."])
-     :nav :welcome)))
+       " to see how your team fared."]))))

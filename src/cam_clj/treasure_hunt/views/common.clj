@@ -3,16 +3,8 @@
             [hiccup.element :refer [link-to]]
             [hiccup.page :refer [html5 include-css]]))
 
-(defn navbar
-  [active]
-  [:nav.navbar.navbar-default {:role "navigation"}
-   [:ul.nav.navbar-nav
-    [:li (link-to "/register" "Register")]
-    [:li (when (= active :leaderboard) {:class "active"})
-     (link-to "/leaderboard" "Leaderboard")]]])
-
 (defn layout
-  [content & {:keys [title css nav]
+  [content & {:keys [title css]
               :or {title "Cambridge NonDysfunctional Programmers Treasure Hunt"}}]
   (html5
    [:head
@@ -27,6 +19,4 @@
     (when css
       (apply include-css css))]
    [:body
-    [:div.container
-     (when nav (navbar nav))
-     content]]))
+    [:div.container content]]))
