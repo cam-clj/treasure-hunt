@@ -10,7 +10,7 @@
   [& {:keys [error prefill]}]
   (layout
    (form-to
-    {:class "form-signin" :role "form"} [:post "/register"]
+    {:class "form-signin" :role "form"} [:post (r/register-url)]
     [:h2.form-signin-heading "Register your team"]
     (let [form-class (if error "form-group has-error" "form-group")]
       [:div {:class form-class}
@@ -30,7 +30,7 @@
     (registration-form :error "Please enter your team name")
     (try+
      (let [team-id (m/register-team! team-name lang)]
-       (redirect (str "/" team-id "/welcome")))
+       (redirect (r/welcome-url :team-id team-id)))
      (catch [:error :duplicate-team-name] _
        (registration-form :error (str "Sorry, " team-name " is already taken")
                           :prefill {:lang lang})))))
