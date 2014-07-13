@@ -40,7 +40,10 @@
 
 (defn init
   []
-  (m/init))
+  (let [start (System/currentTimeMillis)]
+    (log/info "Initializing system")
+    (m/init)
+    (log/info "System initialization completed in" (int (/ (- (System/currentTimeMillis) start) 1000)) "seconds")))
 
 (defn wrap-log-request
   [handler]
