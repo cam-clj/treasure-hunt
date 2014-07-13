@@ -52,7 +52,7 @@
   [grid cell]
   (let [neighbour? (neighbours grid cell)]
     (for [direction (keys direction->delta)
-          :let [cell' apply-delta-direction direction cell]
+          :let [cell' (apply-delta-direction direction cell)]
           :when (neighbour? cell')]
       direction)))
 
