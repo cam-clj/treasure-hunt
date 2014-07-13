@@ -8,19 +8,20 @@
   "Create a grid with m columns and n rows. We store the grid as an
    adjacency list - each element in the m x n matrix stores the set of
    that cell's neighbours. We start with an initial grid that is all
-   walls, i.e. every element is the empty set."
+   walls, i.e. every element is the empty set. Note that, for convenience
+   of get-in, update-in, etc. the grid is stored transposed."
   [m n]
-  (into [] (repeat n (into [] (repeat m #{})))))
+  (into [] (repeat m (into [] (repeat n #{})))))
 
 (defn num-cols
   "Return the number of columns in the grid"
   [grid]
-  (count (first grid)))
+  (count grid))
 
 (defn num-rows
   "Return the number of rows in the grid"
   [grid]
-  (count grid))
+  (count (first grid)))
 
 (defn apply-delta-direction
   [direction [x y]]
@@ -43,32 +44,30 @@
 
 (defn neighbours
   "Return the set of neighbours of [x y] in the grid."
-  [grid [x y]]
-  (get-in grid [x y]))
+  [grid cell]
+  (get-in grid cell))
 
 (defn directions-from
   "Return the possible directions to walk from [x y] in the grid."
-  [grid [x y]]
-  (let [neighbour? (neighbours grid [x y])]
-    (for [[direction [delta-x delta-y]] direction->delta
-          :let [x' (+ x delta-x) y' (+ y delta-y)]
-          :when (neighbour? [x' y'])]
+  [grid cell]
+  (let [neighbour? (neighbours grid cell)]
+    (for [direction (keys direction->delta)
+          :let [cell' apply-delta-direction direction cell]
+          :when (neighbour? cell')]
       direction)))
 
 (defn cell-walls
   "Return the set of walls bounding [x y] in the grid. We represent a wall
    between [x y] and [x' y'] as the set #{[x y] [x' y']}."
-  [grid [x y]]
-  (let [neighbour? (neighbours grid [x y])]
-    (reduce (fn [walls [delta-x delta-y]]
-              (let [x' (+ x delta-x)
-                    y' (+ y delta-y)]
-                (if (and (in-grid? grid [x' y'])
-                         (not (neighbour? [x' y'])))
-                  (conj walls #{[x y] [x' y']})
+  [grid cell]
+  (let [neighbour? (neighbours grid cell)]
+    (reduce (fn [walls direction]
+              (let [cell' (apply-delta-direction direction cell)]
+                (if (and (in-grid? grid cell') (not (neighbour? cell')))
+                  (conj walls #{cell cell'})
                   walls)))
             #{}
-            (vals direction->delta))))
+            (keys direction->delta))))
 
 (defn random-prim-maze
   "Generate an m x n maze using the randomized Prim's algorithm,
