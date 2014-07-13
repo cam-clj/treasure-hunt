@@ -21,10 +21,12 @@
   (when-let [team (m/get-team team-id)]
     (layout
      (html
-      [:h1 "Welcome to the hunt..."]
-      [:p "You are in a maze of twisty little passages, all alike. But can you find the treasure?"]
+      [:h1 "Welcome to the treasure hunt..."]
+      [:blockquote
+       "You are in a maze of twisty little passages, all alike."
+       [:footer [:cite "Colossal Cave"]]]
       [:p "Your team has been assigned the id " [:code team-id] ". Make a note of this - you are going to need it to play."]
-      [:p "Your objective is to write a program that will navigate the maze in search of the treasure. Your program interacts with the server by issuing HTTP requests. The server understands the following commands:"]
+      [:p "Your objective is to write a program that will navigate the maze and find the treasure. Your program interacts with the server by issuing HTTP requests. The server understands the following commands:"]
       [:dl
        [:dt "LOOK - " [:code "GET " (r/look-url :team-id team-id)]]
        [:dd "Examine your current position"]
