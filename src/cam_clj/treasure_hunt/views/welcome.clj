@@ -39,5 +39,5 @@
       [:p "Successful requests to the server will return HTTP status 200 (OK) and a plaintext body describing your current location or letting you know if you have found the treasure. Attempts to walk through a wall will return with HTTP status 400 (Bad Request), while unrecognized commands will receive HTTP status 404 (Not Found)."]
       [:p "An example session might look like:"]
       [:pre (sample-session team-id)]
-      [:p "When you have found the treasure, check out the " (link-to {:target "_blank"} "/leaderboard" "Leaderboard")
+      [:p "When you have found the treasure, check out the " (link-to {:target "_blank"} (r/leaderboard-url) "Leaderboard")
        " to see how your team fared."]))))

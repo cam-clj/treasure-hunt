@@ -4,6 +4,7 @@
             [ring.util.response :refer [redirect]]
             [hiccup.form :refer [form-to text-field]]
             [cam-clj.treasure-hunt.views.common :refer [layout]]
+            [cam-clj.treasure-hunt.routes :as r]
             [cam-clj.treasure-hunt.model :as m]))
 
 (defn registration-form

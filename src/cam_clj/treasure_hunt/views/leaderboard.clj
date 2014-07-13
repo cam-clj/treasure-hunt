@@ -1,5 +1,6 @@
 (ns cam-clj.treasure-hunt.views.leaderboard
   (:require [clj-time.format :as f]
+            [hiccup.core :refer [h]]
             [cam-clj.treasure-hunt.model :as m]
             [cam-clj.treasure-hunt.util.interval :refer [seconds->str]]
             [cam-clj.treasure-hunt.views.common :refer [layout]]))
@@ -18,7 +19,7 @@
 (defn render-leaderboard-row
   [row]
   [:tr (map (fn [[_ accessor]]
-              (vector :td (accessor row)))
+              (vector :td (h (accessor row))))
             leaderboard-columns)])
 
 (defn render-leaderboard-table
