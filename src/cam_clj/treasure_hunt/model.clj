@@ -6,8 +6,8 @@
 
 (defonce world (atom nil))
 
-(def ^:dynamic *maze-cols* 3)
-(def ^:dynamic *maze-rows* 3)
+(def ^:dynamic *maze-cols* 250)
+(def ^:dynamic *maze-rows* 250)
 (def ^:dynamic *loop-factor* nil)
 
 (defn uuid [] (.toString (UUID/randomUUID)))
