@@ -8,7 +8,7 @@
 
 (def ^:dynamic *maze-cols* 250)
 (def ^:dynamic *maze-rows* 250)
-(def ^:dynamic *loop-factor* nil)
+(def ^:dynamic *loop-factor* 0.1)
 
 (defn uuid [] (.toString (UUID/randomUUID)))
 
