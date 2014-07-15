@@ -25,8 +25,8 @@
       [:blockquote
        "You are in a maze of twisty little passages, all alike."
        [:footer [:cite "Colossal Cave"]]]
-      [:p "Your team has been assigned the id " [:code team-id] ". Make a note of this - you are going to need it to play."]
-      [:p "Your objective is to write a program that will navigate the maze and find the treasure. Your program interacts with the server by issuing HTTP requests. The server understands the following commands:"]
+      [:p "Your objective is to write a program to navigate the maze and find the treasure. You move around the maze by issuing HTTP requests to the server. Your access token is " [:code team-id] "; make a note of this - you will need it to interact with the server."]
+      [:p " The server understands the following commands:"]
       [:dl
        [:dt "LOOK - " [:code "GET " (r/look-url :team-id team-id)]]
        [:dd "Examine your current position"]
